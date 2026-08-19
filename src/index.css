@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Canvas needs CSS vars since it can't use Tailwind directly */
+:root {
+  --canvas-bg: #f1f5f9;
+  --canvas-dark: #0f172a;
+}
+
+.dark {
+  --canvas-bg: #0f172a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
