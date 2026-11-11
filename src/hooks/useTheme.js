@@ -1,23 +1,36 @@
 import { useState, useEffect } from 'react';
 
+const KEY = 'frazil_theme';
+
+const initialTheme = () => {
+  // ?theme=dark|light lets an embedding site match its own look
+  const param = new URLSearchParams(window.location.search).get('theme');
+  if (param === 'dark' || param === 'light') return param;
+  try {
+    const saved = localStorage.getItem(KEY);
+    if (saved === 'dark' || saved === 'light') return saved;
+  } catch {
+    // storage unavailable
+  }
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+};
+
 export const useTheme = () => {
-  const [theme, setTheme] = useState(() => {
-    const saved = localStorage.getItem('frazil_theme');
-    if (saved) return saved;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  });
+  const [theme, setTheme] = useState(initialTheme);
 
   useEffect(() => {
-    const root = document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
-    localStorage.setItem('frazil_theme', theme);
+    document.documentElement.classList.toggle('dark', theme === 'dark');
   }, [theme]);
 
-  const toggle = () => setTheme(currentTheme => currentTheme === 'dark' ? 'light' : 'dark');
+  const toggle = () => setTheme(current => {
+    const next = current === 'dark' ? 'light' : 'dark';
+    try {
+      localStorage.setItem(KEY, next);
+    } catch {
+      // storage unavailable
+    }
+    return next;
+  });
 
   return { theme, toggle };
-}
+};

@@ -1,6 +1,6 @@
 export const btn = {
   primary: [
-    'w-full max-w-xs bg-gradient-to-r from-indigo-500 to-cyan-400',
+    'block text-center w-full max-w-xs bg-gradient-to-r from-indigo-500 to-cyan-400',
     'text-white font-bold text-lg py-4 px-12 rounded-full',
     'shadow-lg shadow-indigo-200 dark:shadow-indigo-900',
     'hover:-translate-y-0.5 hover:shadow-xl hover:shadow-indigo-300 dark:hover:shadow-indigo-800',

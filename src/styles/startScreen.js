@@ -1,7 +1,9 @@
 export const startStyles = {
   wrapper: 'flex flex-col items-center text-center w-full max-w-2xl gap-0',
-  title: 'text-5xl font-black bg-gradient-to-r from-indigo-500 to-cyan-400 bg-clip-text text-transparent tracking-tight mb-2',
-  tagline: 'text-slate-500 dark:text-slate-400 text-lg mb-6',
+  title: 'text-4xl sm:text-5xl font-black bg-gradient-to-r from-indigo-500 to-cyan-400 bg-clip-text text-transparent tracking-tight mb-2',
+  titleCompact: 'text-3xl sm:text-4xl font-black bg-gradient-to-r from-indigo-500 to-cyan-400 bg-clip-text text-transparent tracking-tight mb-2',
+  tagline: 'text-slate-500 dark:text-slate-400 text-base sm:text-lg mb-6',
+  best: 'mt-4 text-sm text-slate-500 dark:text-slate-400',
 
   // Accordion
   accordion: 'w-full mt-5',
@@ -31,7 +33,7 @@ export const startStyles = {
   catDesc: 'text-xs text-slate-400 dark:text-slate-500',
 
   grid3: 'grid grid-cols-3 sm:grid-cols-6 gap-2',
-  grid4: 'grid grid-cols-4 gap-2',
+  grid4: 'grid grid-cols-2 sm:grid-cols-4 gap-2',
   grid1: 'grid grid-cols-1 max-w-[130px]',
 
   flavorCard: [

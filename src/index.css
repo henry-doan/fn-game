@@ -2,20 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Canvas needs CSS vars since it can't use Tailwind directly */
-:root {
-  --canvas-bg: #f1f5f9;
-  --canvas-dark: #0f172a;
-}
-
-.dark {
-  --canvas-bg: #0f172a;
-}
-
 * {
   box-sizing: border-box;
 }
 
+html,
+body {
+  margin: 0;
+}
+
 body {
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #f8fafc;
+}
+
+html.dark body {
+  background: #020617;
+}
+
+/* Embed mode: transparent page so it blends into the host site */
+html.embed body {
+  background: transparent;
+}
+
+/* Play field: 6:5 aspect, as wide as possible but never taller than the
+   viewport minus the surrounding UI (--reserved, set inline by GameCanvas). */
+.game-stage {
+  aspect-ratio: 6 / 5;
+  width: min(100%, 720px, max(280px, calc((100vh - var(--reserved, 120px)) * 1.2)));
+  width: min(100%, 720px, max(280px, calc((100dvh - var(--reserved, 120px)) * 1.2)));
+}
+
+/* Inside an iframe, let the field grow to fill the frame */
+html.embed .game-stage {
+  width: min(100%, max(240px, calc((100vh - var(--reserved, 16px)) * 1.2)));
+  width: min(100%, max(240px, calc((100dvh - var(--reserved, 16px)) * 1.2)));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-countdown,
+  .animate-pulse-warn {
+    animation: none !important;
+  }
 }
