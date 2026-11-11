@@ -1,5 +1,7 @@
 export const lbStyles = {
   section: 'w-full max-w-lg',
+  sectionLarge: 'w-full max-w-2xl',
+  headerTitleLarge: 'text-3xl sm:text-4xl font-black bg-gradient-to-r from-indigo-500 to-cyan-400 bg-clip-text text-transparent',
   header: 'flex items-center justify-between mb-4',
   headerTitle: 'text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400',
   empty: [
@@ -28,7 +30,7 @@ export const lbStyles = {
     if (rank === 2) return base + ' text-orange-500 dark:text-orange-400';
     return base + ' text-slate-400 dark:text-slate-500';
   },
-  name: 'flex-1 font-semibold text-sm text-slate-800 dark:text-slate-200',
+  name: 'flex-1 min-w-0 truncate font-semibold text-sm text-slate-800 dark:text-slate-200',
   score: 'font-black text-lg text-indigo-500 dark:text-indigo-400',
   date: 'text-xs text-slate-400 dark:text-slate-500 min-w-[44px] text-right',
 }

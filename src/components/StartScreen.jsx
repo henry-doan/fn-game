@@ -12,17 +12,19 @@ const CATEGORIES = [
 
 const ptLabel = (pts) => pts >= 0 ? `+${pts}` : `${pts}`;
 
-const StartScreen = ({ onStart }) => {
+const StartScreen = ({ onStart, best, duration, compact }) => {
   const [guideOpen, setGuideOpen] = useState(false);
 
   return (
     <div className={s.wrapper}>
-      <h1 className={s.title}>Frazil Flavor Catcher</h1>
+      <h1 className={compact ? s.titleCompact : s.title}>Frazil Flavor Catcher</h1>
       <p className={s.tagline}>Catch falling flavors before time runs out!</p>
 
       <button className={btn.primary} onClick={onStart}>
         Start Game
       </button>
+
+      {best > 0 && <p className={s.best}>Your best: <strong>{best}</strong></p>}
 
       {/* Collapsible flavor guide */}
       <div className={s.accordion}>
@@ -65,10 +67,11 @@ const StartScreen = ({ onStart }) => {
 
           <ul className={s.instructionsList}>
             {[
-              'Move your mouse or use arrow keys to control the cup catcher',
+              'Move your mouse, drag your finger, or use the arrow keys to move the cup catcher',
               'Energy & Cafetango cups fall faster and score more points',
               'Avoid empty cups — they cost you points!',
-              'You have 60 seconds — catch as many as you can!',
+              `You have ${duration} seconds — it gets faster as the clock runs down!`,
+              'Press Esc or P (or the pause button) to pause',
             ].map((tip, i) => (
               <li key={i} className={s.instructionsItem}>
                 <span className={s.instructionsDot} />

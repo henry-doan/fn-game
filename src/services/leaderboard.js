@@ -10,17 +10,31 @@ export const leaderboardService = {
     }
   },
 
+  /** Saves a score; returns { entries, entry } where entry is the saved row (or null if it didn't make the cut). */
   save(name, score) {
-    const entries = this.getAll();
-    entries.push({ name: name.trim() || 'Anonymous', score, date: new Date().toISOString() });
-    entries.sort((entryA, entryB) => entryB.score - entryA.score);
-    const trimmed = entries.slice(0, MAX_ENTRIES);
-    localStorage.setItem(KEY, JSON.stringify(trimmed));
-    return trimmed;
+    const entry = {
+      id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      name: name.trim() || 'Anonymous',
+      score,
+      date: new Date().toISOString(),
+    };
+    const entries = [...this.getAll(), entry]
+      .sort((a, b) => b.score - a.score)
+      .slice(0, MAX_ENTRIES);
+    try {
+      localStorage.setItem(KEY, JSON.stringify(entries));
+    } catch {
+      // ignore — storage unavailable
+    }
+    return { entries, entry: entries.includes(entry) ? entry : null };
   },
 
   clear() {
-    localStorage.removeItem(KEY);
+    try {
+      localStorage.removeItem(KEY);
+    } catch {
+      // ignore
+    }
     return [];
   },
 };

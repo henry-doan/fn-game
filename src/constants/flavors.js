@@ -1,18 +1,18 @@
-import cupCatcher from '../assets/frazil/cup_catcher.png';
-import blueRazzmatazz from '../assets/frazil/flavors/BlueRazzmatazz.png';
-import georgiaPeach from '../assets/frazil/flavors/GeorgiaPeach.png';
-import greenApple from '../assets/frazil/flavors/GreenApple.png';
-import rockNRoll from '../assets/frazil/flavors/RockNRoll.png';
-import simplyMango from '../assets/frazil/flavors/SimplyMango.png';
-import tigersBlood from '../assets/frazil/flavors/TigersBlood.png';
-import lemonberry from '../assets/frazil/energy/Lemonberry.png';
-import orangeCream from '../assets/frazil/energy/OrangeCream.png';
-import pinaColada from '../assets/frazil/energy/PinaColada.png';
-import smashberry from '../assets/frazil/energy/Smashberry.png';
-import caramelMacchiato from '../assets/frazil/cafetango/CaramelMacchiato.png';
-import espresso from '../assets/frazil/cafetango/Espresso.png';
-import frenchVanilla from '../assets/frazil/cafetango/FrenchVanilla.png';
-import mocha from '../assets/frazil/cafetango/Mocha.png';
+import cupCatcher from '../assets/frazil/cup_catcher.webp';
+import blueRazzmatazz from '../assets/frazil/flavors/BlueRazzmatazz.webp';
+import georgiaPeach from '../assets/frazil/flavors/GeorgiaPeach.webp';
+import greenApple from '../assets/frazil/flavors/GreenApple.webp';
+import rockNRoll from '../assets/frazil/flavors/RockNRoll.webp';
+import simplyMango from '../assets/frazil/flavors/SimplyMango.webp';
+import tigersBlood from '../assets/frazil/flavors/TigersBlood.webp';
+import lemonberry from '../assets/frazil/energy/Lemonberry.webp';
+import orangeCream from '../assets/frazil/energy/OrangeCream.webp';
+import pinaColada from '../assets/frazil/energy/PinaColada.webp';
+import smashberry from '../assets/frazil/energy/Smashberry.webp';
+import caramelMacchiato from '../assets/frazil/cafetango/CaramelMacchiato.webp';
+import espresso from '../assets/frazil/cafetango/Espresso.webp';
+import frenchVanilla from '../assets/frazil/cafetango/FrenchVanilla.webp';
+import mocha from '../assets/frazil/cafetango/Mocha.webp';
 
 export const FLAVORS = [
   // Regular — normal speed, 1–2 pts

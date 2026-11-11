@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import { gameOverStyles as s } from '../styles/gameOver';
 import { btn } from '../styles/buttons';
+import { routePath } from '../routes';
 
-const GameOver = ({ score, onSave, onRestart }) => {
+const GameOver = ({ score, best, isNewBest, leaderboardEnabled, onSave, onRestart, embedded }) => {
   const [name, setName] = useState('');
-  const [saved, setSaved] = useState(false);
+  const [saved, setSaved] = useState(null); // { placed: boolean, rank?: number }
 
   const handleSave = () => {
-    onSave(name || 'Anonymous', score);
-    setSaved(true);
+    const entry = onSave(name || 'Anonymous', score);
+    setSaved(entry ? { placed: true, rank: entry.rank } : { placed: false });
   };
+
+  const showSaveForm = leaderboardEnabled && !saved;
 
   return (
     <div className={s.card}>
@@ -17,7 +20,13 @@ const GameOver = ({ score, onSave, onRestart }) => {
       <div className={s.scoreNum}>{score}</div>
       <p className={s.scoreLabel}>points scored</p>
 
-      {!saved ? (
+      {isNewBest ? (
+        <p className={s.newBest}>🎉 New personal best!</p>
+      ) : (
+        <p className={s.best}>Your best: <strong>{best}</strong></p>
+      )}
+
+      {showSaveForm && (
         <>
           <label className={s.nameLabel} htmlFor="player-name">
             Enter your name for the leaderboard
@@ -31,24 +40,31 @@ const GameOver = ({ score, onSave, onRestart }) => {
             value={name}
             onChange={event => setName(event.target.value)}
             onKeyDown={event => event.key === 'Enter' && handleSave()}
-            autoFocus
+            autoFocus={!embedded}
           />
-          <div className={s.actions}>
-            <button className={btn.primary} style={{ maxWidth: '100%' }} onClick={handleSave}>
-              Save Score
-            </button>
-            <button className={btn.secondary} onClick={onRestart}>
-              Skip &amp; Play Again
-            </button>
-          </div>
         </>
-      ) : (
-        <div className={s.actions}>
-          <button className={btn.primary} style={{ maxWidth: '100%' }} onClick={onRestart}>
-            Play Again
-          </button>
-        </div>
       )}
+
+      {saved && (
+        <p className={s.rankMsg}>
+          {saved.placed ? <>You placed <strong>#{saved.rank}</strong> on the leaderboard!</> : "Score saved — not quite top 20 this time."}
+          {' '}
+          <a href={routePath('/leaderboard')} target={embedded ? '_blank' : undefined} rel="noreferrer" className={s.rankLink}>
+            View leaderboard
+          </a>
+        </p>
+      )}
+
+      <div className={s.actions}>
+        {showSaveForm ? (
+          <>
+            <button className={btn.primary} style={{ maxWidth: '100%' }} onClick={handleSave}>Save Score</button>
+            <button className={btn.secondary} onClick={onRestart}>Skip &amp; Play Again</button>
+          </>
+        ) : (
+          <button className={btn.primary} style={{ maxWidth: '100%' }} onClick={onRestart} autoFocus={!embedded}>Play Again</button>
+        )}
+      </div>
     </div>
   );
 };
